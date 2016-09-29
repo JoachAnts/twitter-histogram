@@ -17,6 +17,7 @@ get '/histogram/:name' do
 	
 	# This will be compared to every tweet's creation datetime to ensure it's within the last 24 hours
 	start_time = DateTime.now - 1.0
+	offset = Time.now.getlocal.utc_offset / 3600
 	
 	# Initialize counts of all hours to 0
 	count_hash = {}
@@ -29,7 +30,9 @@ get '/histogram/:name' do
 		# If true we have reached end of tweets from within the last 24 hours
 		break if tweet_time < start_time
 		
-		count_hash[tweet_time.strftime "%-H"] += 1
+		# Convert hour to local time (tweet time is UTC)
+		local_time = tweet_time.strftime("%-H").to_i.+(offset).%(24).to_s
+		count_hash[local_time] += 1
 	end
 
 	return count_hash.to_json
