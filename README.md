@@ -2,9 +2,11 @@
 
 This installation guide describes how to setup the program on a Debian-based OS
 
+In terms of shortcuts made, I would say that using high level libraries such as the sinatra and twitter gems were chosen to avoid large amounts of code and dealing with the low level details of authorization
+
 ## Dependencies
 
-This program requires the following dependencies:
+The program requires the following dependencies:
 
 1. Ruby: `sudo apt-get install ruby`
 2. Ruby-dev: `sudo apt-get install ruby-dev`
@@ -29,3 +31,10 @@ ACCESS_TOKEN_SECRET=""
 2. Make a request, either in a browser or using curl:
 	* `http://localhost:4567/hello/:name`
 	* `http://localhost:4567/histogram/:name`
+	
+## Testing
+
+To run the tests:
+
+1. Install rack-test: `sudo gem install rack-test`
+2. Run: `ruby test.rb`
